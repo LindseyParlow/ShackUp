@@ -1,14 +1,27 @@
 if exists(select * from INFORMATION_SCHEMA.ROUTINES
-	where ROUTINE_NAME = 'DbReset')
-		drop procedure DbReset
+	where ROUTINE_NAME = 'StatesSelectAll')
+		drop procedure StatesSelectAll
 go
 
-create procedure DbReset as
+create procedure StatesSelectAll as
 begin
-	delete from States;
-
-	insert into States(StateId, StateName)
-	values ('OH', 'Ohio'),
-	('KY', 'Kentucky'),
-	('MN', 'Minnesota');
+	select StateId, StateName
+	from States
 end
+
+go
+
+if exists(select * from INFORMATION_SCHEMA.ROUTINES
+	where ROUTINE_NAME = 'BathroomTypesSelectAll')
+		drop procedure BathroomTypesSelectAll
+go
+
+create procedure BathroomTypesSelectAll as
+begin
+	select BathroomTypeId, BathroomTypeName
+	from BathroomTypes
+	order by BathroomTypeName
+
+end
+
+go
