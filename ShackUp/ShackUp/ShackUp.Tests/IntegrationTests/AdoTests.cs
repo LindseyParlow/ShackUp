@@ -34,5 +34,27 @@ namespace ShackUp.Tests.IntegrationTests
             Assert.AreEqual(1, types[0].BathroomTypeId);
             Assert.AreEqual("Indoor", types[0].BathroomTypeName);
         }
+
+        [Test]
+        public void CanLoadListing()
+        {
+            var repo = new ListingsRepositoryADO();
+
+            var listing = repo.GetById(1);
+
+            Assert.IsNotNull(listing);
+
+            Assert.AreEqual(1, listing.ListingId);
+            Assert.AreEqual("00000000-0000-0000-0000-000000000000", listing.UserId);
+            Assert.AreEqual("OH", listing.StateId);
+            Assert.AreEqual(3, listing.BathroomTypeId);
+            Assert.AreEqual("Test shack 1", listing.Nickname);
+            Assert.AreEqual("Cleveland", listing.City);
+            Assert.AreEqual(120m, listing.Rate);
+            Assert.AreEqual(400m, listing.SquareFootage);
+            Assert.AreEqual(false, listing.HasElectric);
+            Assert.AreEqual(true, listing.HasHeat);
+            Assert.AreEqual("placeholder.png", listing.ImageFileName);
+        }
     }
 }

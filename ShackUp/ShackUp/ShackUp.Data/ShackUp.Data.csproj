@@ -42,8 +42,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ADO\BathroomTypesRepositoryADO.cs" />
+    <Compile Include="ADO\ListingsRepositoryADO.cs" />
     <Compile Include="ADO\StatesRepositoryADO.cs" />
     <Compile Include="Interfaces\IBathroomTypesRepository.cs" />
+    <Compile Include="Interfaces\IListingsRepository.cs" />
     <Compile Include="Interfaces\IStatesRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Settings.cs" />

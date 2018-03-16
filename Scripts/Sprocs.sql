@@ -31,7 +31,7 @@ if exists(select * from INFORMATION_SCHEMA.ROUTINES
 go
 
 create procedure ListingsInsert (
-	@ListingsId int output,
+	@ListingId int output,
 	@UserId nvarchar(128),
 	@StateId char(2),
 	@BathroomTypeId int,
@@ -48,7 +48,7 @@ begin
 		HasHeat, ImageFileName)
 	values (@UserId, @StateId, @BathroomTypeId, @Nickname, @City, @Rate, @SquareFootage, @HasElectric, @HasHeat, @ImageFileName);
 
-	set @ListingsId = SCOPE_IDENTITY();
+	set @ListingId = SCOPE_IDENTITY();
 
 end
 go
@@ -59,7 +59,7 @@ if exists(select * from INFORMATION_SCHEMA.ROUTINES
 go
 
 create procedure ListingsUpdate (
-	@ListingsId int,
+	@ListingId int,
 	@UserId nvarchar(128),
 	@StateId char(2),
 	@BathroomTypeId int,
@@ -83,7 +83,7 @@ begin
 		HasElectric = @HasElectric, 
 		HasHeat = @HasHeat, 
 		ImageFileName = @ImageFileName
-	where ListingId = @ListingsId
+	where ListingId = @ListingId
 
 end
 go
@@ -104,5 +104,21 @@ begin
 	delete from Listings where ListingId = @ListingsId;
 
 	commit transaction
+end
+go
+
+
+if exists(select * from INFORMATION_SCHEMA.ROUTINES
+	where ROUTINE_NAME = 'ListingsSelect')
+		drop procedure ListingsSelect
+go
+
+create procedure ListingsSelect (
+	@ListingId int
+)as 
+begin
+	select ListingId, UserId, StateId, BathroomTypeId, Nickname, City, Rate, SquareFootage, HasElectric, HasHeat, ImageFileName
+	from Listings
+	where ListingId = @ListingId
 end
 go
